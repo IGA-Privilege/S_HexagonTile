@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727a8386674dab148a8e539169e8962f, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  palette: {fileID: 2800000, guid: 31cb41e06778b824e9222c38c86c3296, type: 3}
+  map: {fileID: 2800000, guid: c11a3cb35b38ec64b989093449bbeaa3, type: 3}
+  tile_Base: {fileID: 3276310004466360481, guid: f13c044d421d7ad41a8f09ee75ceb1bd, type: 3}
+  hexTiles:
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    tile_Target: {fileID: 1271263658083235791, guid: 162e45f1ba2f00f499a6b9a870b49821, type: 3}
+    tileType: 0
+  - color: {r: 0, g: 0, b: 0, a: 1}
+    tile_Target: {fileID: 1271263658083235791, guid: 4204d5084401b444cb4e5d40df7d0aa7, type: 3}
+    tileType: 1
+  - color: {r: 0.26666668, g: 0.90588236, b: 0.32156864, a: 1}
+    tile_Target: {fileID: 1271263658083235791, guid: 34a658fa0516db642ae47f6459ffd651, type: 3}
+    tileType: 2
+  - color: {r: 0.23921569, g: 0.627451, b: 0.8235294, a: 1}
+    tile_Target: {fileID: 1271263658083235791, guid: 638a03a5028fc274ca7be3d49150aef5, type: 3}
+    tileType: 4
+  - color: {r: 0.8235294, g: 0.69803923, b: 0.23921569, a: 1}
+    tile_Target: {fileID: 1271263658083235791, guid: 42110d4bfab5a4340bae48b614c14370, type: 3}
+    tileType: 3
