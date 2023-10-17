@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b88ca4b0cd40064fb8a7888e4ff971b, type: 3}
+  m_Name: Tile_Mountain
+  m_EditorClassIdentifier: 
+  tileType: 3
+  tileName: Mountain
+  tileObject: {fileID: 1271263658083235791, guid: 42110d4bfab5a4340bae48b614c14370, type: 3}
+  onTileObjects:
+  - targetObj: {fileID: 8308216056627029504, guid: b8b6ab23ede1d514488cf7478be0912d, type: 3}
+    toGenRange:
+      minValue: 0
+      maxValue: 0
+    toScaleRange:
+      minValue: 1.0110294
+      maxValue: 1.3419105
+    instantiateType: 0

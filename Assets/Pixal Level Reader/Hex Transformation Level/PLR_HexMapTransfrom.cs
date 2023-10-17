@@ -39,9 +39,11 @@ public class PLR_HexMapTransform : MonoBehaviour
                         tileTrans = newTile.transform,
                         index = hexTilesData.Count,
                         originPos = pos,
-                        tile_Target = colorObj.tile_Target,
-                        tileType = colorObj.tileType
+                        tile_Target = colorObj.tileInfoContainer.tileObject,
+                        tileType = colorObj.tileInfoContainer.tileType,
+                        tileName = colorObj.tileInfoContainer.tileName
                     };
+                    Debug.Log(newTileData.tileName);
                     hexTilesData.Add(newTileData);
                     newTile.GetComponent<O_TileInfoContainer>().thisInfo = newTileData;
                     newTile.transform.SetParent(newLevelParent);
@@ -86,4 +88,5 @@ public class HexTileTransformData
     public GameObject tile_Target;
     public TileType tileType;
     public Vector3 originPos;
+    public string tileName;
 }

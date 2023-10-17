@@ -17,13 +17,20 @@ public class M_InputListener : MonoBehaviour
 
     private void MobileCenterRaycastHit()
     {
+        if (Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit))
+        {
+            if (hit.transform.tag == "Tile") M_Tile.Instance.UpdateTargetingTile(hit.transform.parent);
+        }
+        else M_Tile.Instance.UpdateTargetingTile(null);
+
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             if (Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit))
             {
                 if (hit.transform.tag == "Tile")
                 {
-                    Debug.Log(hit.transform.parent.gameObject.name);
+                    Debug.Log(hit.transform.parent.GetComponent<O_TileInfoContainer>().thisInfo.tileType);
+                    hit.transform.parent.GetComponent<O_TileInteraction>().OnClicked();
                 }
             }
         }
@@ -31,15 +38,23 @@ public class M_InputListener : MonoBehaviour
 
     private void PCRaycastHit()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            if (hit.transform.tag == "Tile") M_Tile.Instance.UpdateTargetingTile(hit.transform.parent);
+        }
+        else M_Tile.Instance.UpdateTargetingTile(null);
+
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
             if (Physics.Raycast(ray, out hit, 100))
             {
                 if (hit.transform.tag == "Tile")
                 {
-                    Debug.Log(hit.transform.parent.gameObject.name);
-                    hit.transform.GetComponent<O_Tile>().OnClicked();
+                    Debug.Log(hit.transform.parent.GetComponent<O_TileInfoContainer>().thisInfo.tileType);
+                    hit.transform.parent.GetComponent<O_TileInteraction>().OnClicked();
                 }
             }
         }

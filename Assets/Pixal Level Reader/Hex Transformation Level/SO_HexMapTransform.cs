@@ -24,8 +24,8 @@ public class SO_HexMapTransform : ScriptableObject
             hexTiles.Add(new HexTileTransfromBinder
             {
                 color = palette.GetPixel(x, 0),
-                tile_Target = null,
-                tileType = TileType.Start
+                tileInfoContainer = null
+                //tileType = TileType.Start
             });
     }
 }
@@ -34,8 +34,10 @@ public class SO_HexMapTransform : ScriptableObject
 public class HexTileTransfromBinder
 {
     public Color color;
-    public GameObject tile_Target;
-    public TileType tileType;
+    public SO_TileInfoContainer tileInfoContainer;
+    //public GameObject tile_Target;
+    //public TileType tileType;
+    //public string tileName;
 }
 
 public enum TileType { Start, Destination, Grassland, Mountain, Ocean }

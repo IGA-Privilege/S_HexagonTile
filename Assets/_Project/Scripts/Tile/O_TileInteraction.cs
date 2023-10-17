@@ -7,19 +7,25 @@ public class O_TileInteraction : MonoBehaviour
 
     void OnSeedLanding()
     {
-        M_Tile.Instance.DetermineNearbyTile(transform);
+        //M_Tile.Instance.DetermineNearbyTile(transform);
     }
 
     public void OnClicked()
     {
-        if (M_Tile.Instance.currentTilesNeighbors.Contains(transform.parent)) NearbyTileClicked();
-    }
-
-    private void NearbyTileClicked()
-    {
-        if (M_Seed.Instance.currentLandingTile != this)
+        if(M_Tile.Instance.isMoveAllowed)
         {
-            //M_Seed.
+            Dictionary<TileRelativePos, O_TileInfoContainer> thisNeighbors = GetComponent<O_TileInfoContainer>().neighborTiles;
+            O_TileInfoContainer currentLandingTile = M_SeedAction.Instance.tile_Landing.GetComponent<O_TileInfoContainer>();
+            if (thisNeighbors.ContainsValue(currentLandingTile))
+            {
+                M_SeedAction.Instance.TryRegularMove(transform);
+            }
+
+        }
+
+        foreach (var item in GetComponent<O_TileInfoContainer>().neighborTiles)
+        {
+            Debug.Log(item.Key + " - " + item.Value.thisInfo.tileName);
         }
     }
 }
