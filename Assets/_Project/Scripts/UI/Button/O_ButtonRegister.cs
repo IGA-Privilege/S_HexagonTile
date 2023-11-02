@@ -13,7 +13,7 @@ public class O_ButtonRegister : MonoBehaviour
     {
         RemoveButtonListen();
         AddButtonListen(targetMethod.GetCertainMethod());
-        SyncIconImage();
+        //SyncIconImage();
     }
 
     protected void AddButtonListen(UnityAction action) //Button¼àÌýÊÂ¼þ

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
-public enum ButtonType { Sun, Rain, Monsoon, Updraft, Scan, Setting, PullOut, Confirm, Cancel, Boat, Bird }
+public enum ButtonType { Sun, Rain, Monsoon, Updraft, Scan, Setting, PullOut, Confirm, Cancel, Boat, Bird, Start, Return, Level }
 namespace Jahaha.UI
 {
     [CreateAssetMenu(fileName = "New UI Method", menuName = "Jahaha/UI/New UI Method")]
@@ -44,6 +45,12 @@ namespace Jahaha.UI
                     return Excute_Boat;
                 case ButtonType.Bird:
                     return Excute_Bird;
+                case ButtonType.Start:
+                    return Excute_Start;
+                case ButtonType.Return:
+                    return Excute_Return;
+                case ButtonType.Level:
+                    return Excute_Level;
                 default: return null;
             }
         }
@@ -97,7 +104,21 @@ namespace Jahaha.UI
                 currentElement.Set();
                 currentElement = null;
             }
+        }
 
+        private void Excute_Start()
+        {
+            SceneManager.LoadScene(1);
+        }
+
+        private void Excute_Return()
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        private void Excute_Level()
+        {
+            SceneManager.LoadScene(residueNumber);
         }
 
         private void Excute_Cancel()

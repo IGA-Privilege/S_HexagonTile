@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b446bd146fb71e40a63922cfa4d8334, type: 3}
-  m_Name: UIB_Scan
+  m_Name: UIB_Return
   m_EditorClassIdentifier: 
-  type: 4
+  type: 12
   residueNumber: 0
-  buttonIcon: {fileID: 21300000, guid: 5220bcc5781255e4c97e66decd616884, type: 3}
+  buttonIcon: {fileID: 21300000, guid: 2faeaf49533b5cf4195207b899e73281, type: 3}
   buttonBG: {fileID: 0}
