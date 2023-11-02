@@ -47,6 +47,38 @@ public class PLR_HexMapTransform : MonoBehaviour
                     hexTilesData.Add(newTileData);
                     newTile.GetComponent<O_TileInfoContainer>().thisInfo = newTileData;
                     newTile.transform.SetParent(newLevelParent);
+
+                    switch (newTileData.tileType)
+                    {
+                        case TileType.Start:
+                            newTile.AddComponent<O_StartTile>();
+                            newTile.name = "Start";
+                            break;
+                        case TileType.Destination:
+                            newTile.AddComponent<O_DestinationTile>();
+                            newTile.name = "Destination";
+                            break;
+                        case TileType.Grassland:
+                            newTile.AddComponent<O_TreeTile>();
+                            newTile.name = "GrassLand";
+                            break;
+                        case TileType.Mountain:
+                            newTile.AddComponent<O_MountainTile>();
+                            newTile.name = "Montain";
+                            break;
+                        case TileType.Ocean:
+                            newTile.AddComponent<O_OceanTile>();
+                            newTile.name = "Ocean";
+                            break;
+                        case TileType.FlowerLand:
+                            newTile.AddComponent<O_TreeTile>();
+                            newTile.name = "FlowerLand";
+                            break;
+                        case TileType.Snow:
+                            newTile.AddComponent<O_SnowTile>();
+                            newTile.name = "Snow";
+                            break;
+                    }
                 }
                 else continue;
             }

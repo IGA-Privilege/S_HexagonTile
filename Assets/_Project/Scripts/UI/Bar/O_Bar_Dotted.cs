@@ -37,6 +37,12 @@ public class O_Bar_Dotted : MonoBehaviour
         else ML_Scale.Pop(0, 1.2f, 0.9f, 1, transform.GetChild(value_Current - 1), 0.5f);
     }
 
+    public bool isEnergyAffluent()
+    {
+        if (value_Current > 0) return true;
+        else return false;
+    }
+
     private void OnValidate()
     {
 

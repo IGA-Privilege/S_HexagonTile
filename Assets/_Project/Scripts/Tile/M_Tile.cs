@@ -8,6 +8,7 @@ using UnityEngine.InputSystem.HID;
 public class M_Tile : Singleton<M_Tile>
 {
     [HideInInspector] public Transform tile_Targeting;
+    [HideInInspector] public TileRelativePos tile_CurrentSide;
     public List<Transform> currentTilesNeighbors = new List<Transform>();
     private PLR_HexMapTransform hexMap;
     public Dictionary<TileType, Material[]> tileMaterialBinder = new Dictionary<TileType, Material[]>();
@@ -90,12 +91,36 @@ public class M_Tile : Singleton<M_Tile>
         return tileMaterialBinder[tileType][targetIndex];
     }
 
-    public void UpdateTargetingTile(Transform tileTrans)
+    public void UpdateTargetingTile(RaycastHit hit)
     {
-        if(tile_Targeting != tileTrans)
+        if(tile_Targeting != hit.transform)
         {
-            tile_Targeting = tileTrans;
-            O_TileHighLighter.Instance.UpdateTargetingTile(tileTrans);
+            tile_Targeting = hit.transform;
+            O_TileHighLighter.Instance.UpdateTargetingTile(hit.transform);
+            //Debug.Log(hit.transform.parent.GetComponent<O_TileInfoContainer>().thisInfo.tileType);
         }
+
+        if (tile_Targeting != null)
+        {
+            Vector3 relativeDir = hit.point - hit.transform.position;
+            float angle = Mathf.Atan2(relativeDir.z, relativeDir.x) * Mathf.Rad2Deg;
+
+            tile_CurrentSide = angle switch
+            {
+                <= 30 and > -30 => TileRelativePos.East,
+                <= 90 and > 30 => TileRelativePos.NorthEast,
+                <= 150 and > 90 => TileRelativePos.NorthWest,
+                <= -30 and > -90 => TileRelativePos.SouthEast,
+                <= -90 and > -150 => TileRelativePos.SouthWest,
+                _ => TileRelativePos.West,
+            };
+            //Debug.Log(hit.point + "   " + hit.transform.position + "    " + angle+"    "+ tile_CurrentSide);
+        }
+    }
+
+    public void UpdateTargetingTileToNull()
+    {
+        tile_Targeting = null;
+        O_TileHighLighter.Instance.UpdateTargetingTile(null);
     }
 }

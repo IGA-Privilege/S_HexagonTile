@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering;
+using static UnityEditor.Progress;
 
 public class M_TileContentGenerator : MonoBehaviour
 {
@@ -18,33 +19,36 @@ public class M_TileContentGenerator : MonoBehaviour
 
     public void GenerateOnSurfaceContent(TileType tileType, Transform tileTrans)
     {
-        List< OnTileObject> onTileObjects = new List<OnTileObject> ();
+        List<OnTileObject> onTileObjects = new List<OnTileObject>();
+        bool isSoloGen = false;
         foreach (var item in m_MapTransform.colorData.hexTiles)
             if (item.tileInfoContainer.tileType == tileType && item.tileInfoContainer.onTileObjects.Length > 0)
             {
+                isSoloGen = item.tileInfoContainer.isSoloGen;
                 for (int i = 0; i < item.tileInfoContainer.onTileObjects.Length; i++)
-                {
                     onTileObjects.Add(item.tileInfoContainer.onTileObjects[i]);
-                }
             }
 
-        foreach (OnTileObject item in onTileObjects)
+        if (isSoloGen)
         {
-            if (item.toGenRange.maxValue == 0)
-            {
-                GameObject go = Instantiate(item.targetObj, tileTrans.position, Quaternion.identity);
-                go.transform.SetParent(tileTrans.transform.Find("Container"), true);
-                ContentVisualization(go.transform, InstantiateType.DropDown);
-            }
-            else
+            int random = Random.Range(0, onTileObjects.Count);
+
+            GameObject go = Instantiate(onTileObjects[random].targetObj, tileTrans.position + new Vector3(0, 1, 0), Quaternion.identity);
+            go.transform.SetParent(tileTrans.transform.Find("Container"), true);
+            float randomScale = Random.Range(onTileObjects[random].toScaleRange.minValue, onTileObjects[random].toScaleRange.maxValue);
+            SoloContentVisualization(go.transform, onTileObjects[random].instantiateType, randomScale);
+        }
+        else
+        {
+            foreach (OnTileObject item in onTileObjects)
             {
                 int random = Random.Range(item.toGenRange.minValue, item.toGenRange.maxValue);
                 for (int i = 0; i < random; i++)
                 {
-                    GameObject go = Instantiate(item.targetObj, GetRandomPos(tileTrans.position), Quaternion.identity);
+                    GameObject go = Instantiate(item.targetObj, GetRandomPos(tileTrans.position) + new Vector3(0, 1, 0), Quaternion.identity);
                     go.transform.SetParent(tileTrans.transform.Find("Container"), true);
                     float randomScale = Random.Range(item.toScaleRange.minValue, item.toScaleRange.maxValue);
-                    ContentVisualization(go.transform, InstantiateType.ScaleUp, randomScale);
+                    MultiContentVisualization(go.transform, item.instantiateType, randomScale);
                 }
             }
         }
@@ -59,18 +63,28 @@ public class M_TileContentGenerator : MonoBehaviour
         }
     }
 
-    public void ContentVisualization(Transform trans, InstantiateType type)
+    public void SoloContentVisualization(Transform trans, InstantiateType type,float targetScale)
     {
-        trans.Rotate(new Vector3(0, Random.Range(0, 180), 0));
-        trans.localScale = Vector3.zero;
-        trans.position += new Vector3(0, height, 0);
-        Sequence s = DOTween.Sequence();
-        s.Append(trans.DOScale(1.2f, 0.4f));
-        s.Append(trans.DOScale(0.9f, 0.2f));
-        s.Append(trans.DOScale(1, 0.1f));
-        s.AppendInterval(0.3f);
-        s.Append(trans.DOMoveY(trans.localPosition.y - height, 0.1f));
-        s.AppendCallback(() => LandingParticleGeneration());
+        if(type == InstantiateType.DropDown)
+        {
+            trans.Rotate(new Vector3(0, Random.Range(0, 180), 0));
+            trans.localScale = Vector3.zero;
+            trans.position += new Vector3(0, height, 0);
+            Sequence s = DOTween.Sequence();
+            s.Append(trans.DOScale(targetScale * 1.2f, 0.4f));
+            s.Append(trans.DOScale(targetScale * 0.9f, 0.2f));
+            s.Append(trans.DOScale(targetScale, 0.1f));
+            s.AppendInterval(0.3f);
+            s.Append(trans.DOMoveY(trans.localPosition.y - height, 0.1f));
+            s.AppendCallback(() => LandingParticleGeneration());
+            s.AppendCallback(() => M_Game.instance.isGameStart = true);
+        }
+        else if(type == InstantiateType.ScaleUp)
+        {
+            trans.Rotate(new Vector3(0, Random.Range(0, 180), 0));
+            trans.localScale = Vector3.zero;
+            trans.DOScale(targetScale, 1);
+        }
 
         void LandingParticleGeneration()
         {
@@ -79,10 +93,25 @@ public class M_TileContentGenerator : MonoBehaviour
         }
     }
 
-    public void ContentVisualization(Transform trans, InstantiateType type,float targetScale) 
+    public void MultiContentVisualization(Transform trans, InstantiateType type,float targetScale) 
     {
-        trans.Rotate(new Vector3(0, Random.Range(0, 180), 0));
-        trans.localScale = Vector3.zero;
-        trans.DOScale(targetScale, 1);
+        if (type == InstantiateType.DropDown)
+        {
+            trans.Rotate(new Vector3(0, Random.Range(0, 180), 0));
+            trans.localScale = Vector3.zero;
+            trans.position += new Vector3(0, height, 0);
+            Sequence s = DOTween.Sequence();
+            s.Append(trans.DOScale(targetScale * 1.2f, 0.4f));
+            s.Append(trans.DOScale(targetScale * 0.9f, 0.2f));
+            s.Append(trans.DOScale(targetScale, 0.1f));
+            s.AppendInterval(0.3f);
+            s.Append(trans.DOMoveY(trans.localPosition.y - height, 0.1f));
+        }
+        else if (type == InstantiateType.ScaleUp)
+        {
+            trans.Rotate(new Vector3(0, Random.Range(0, 180), 0));
+            trans.localScale = Vector3.zero;
+            trans.DOScale(targetScale, 1);
+        }
     }
 }

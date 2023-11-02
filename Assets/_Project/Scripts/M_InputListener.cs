@@ -19,9 +19,9 @@ public class M_InputListener : MonoBehaviour
     {
         if (Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit))
         {
-            if (hit.transform.tag == "Tile") M_Tile.Instance.UpdateTargetingTile(hit.transform.parent);
+            if (hit.transform.tag == "Tile") M_Tile.Instance.UpdateTargetingTile(hit);
         }
-        else M_Tile.Instance.UpdateTargetingTile(null);
+        else M_Tile.Instance.UpdateTargetingTileToNull();
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -29,7 +29,6 @@ public class M_InputListener : MonoBehaviour
             {
                 if (hit.transform.tag == "Tile")
                 {
-                    Debug.Log(hit.transform.parent.GetComponent<O_TileInfoContainer>().thisInfo.tileType);
                     hit.transform.parent.GetComponent<O_TileInteraction>().OnClicked();
                 }
             }
@@ -38,22 +37,21 @@ public class M_InputListener : MonoBehaviour
 
     private void PCRaycastHit()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit, 100))
+        //Ray ray = Camera.main.ScreenPointToRay(Camera.main.transform.position);
+        if (Physics.Raycast(Camera.main.transform.position, arCamera.transform.forward, out hit))
+        //if (Physics.Raycast(ray, out hit, 100))
         {
-            if (hit.transform.tag == "Tile") M_Tile.Instance.UpdateTargetingTile(hit.transform.parent);
+            if (hit.transform.tag == "Tile") M_Tile.Instance.UpdateTargetingTile(hit);
         }
-        else M_Tile.Instance.UpdateTargetingTile(null);
+        else M_Tile.Instance.UpdateTargetingTileToNull();
 
         if (Input.GetMouseButtonDown(0))
         {
-
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(Camera.main.transform.position, arCamera.transform.forward, out hit))
+            //if (Physics.Raycast(ray, out hit, 100))
             {
                 if (hit.transform.tag == "Tile")
                 {
-                    Debug.Log(hit.transform.parent.GetComponent<O_TileInfoContainer>().thisInfo.tileType);
                     hit.transform.parent.GetComponent<O_TileInteraction>().OnClicked();
                 }
             }

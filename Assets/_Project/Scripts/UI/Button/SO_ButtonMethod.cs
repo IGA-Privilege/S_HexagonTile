@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 
+public enum ButtonType { Sun, Rain, Monsoon, Updraft, Scan, Setting, PullOut, Confirm, Cancel, Boat, Bird }
 namespace Jahaha.UI
 {
     [CreateAssetMenu(fileName = "New UI Method", menuName = "Jahaha/UI/New UI Method")]
     public class SO_ButtonMethod : ScriptableObject
     {
-        public enum ButtonType { Sun, Rain, Monsoon, Updraft ,Scan,Setting,PullOut}
+
         public ButtonType type;
         public int residueNumber;
         public Sprite buttonIcon;
         public Sprite buttonBG;
+        public static O_ElementBase currentElement;
 
         public UnityAction GetCertainMethod()
         {
@@ -34,23 +36,41 @@ namespace Jahaha.UI
                     return Excute_Setting;
                 case ButtonType.PullOut:
                     return Excute_PullOut;
+                case ButtonType.Confirm:
+                    return Excute_Confirm;
+                case ButtonType.Cancel:
+                    return Excute_Cancel;
+                case ButtonType.Boat:
+                    return Excute_Boat;
+                case ButtonType.Bird:
+                    return Excute_Bird;
                 default: return null;
             }
         }
 
         private void Excute_Sun()
         {
-            Debug.Log("Sun");
+            currentElement = Instantiate(M_Game.instance.pre_Sun).GetComponent<O_ElementBase>();
+        }
+
+        private void Excute_Boat()
+        {
+            currentElement = Instantiate(M_Game.instance.pre_Boat).GetComponent<O_ElementBase>();
+        }
+
+        private void Excute_Bird()
+        {
+            currentElement = Instantiate(M_Game.instance.pre_Bird).GetComponent<O_ElementBase>();
         }
 
         private void Excute_Rain()
         {
-            Debug.Log("Rain");
+            currentElement = Instantiate(M_Game.instance.pre_Cloud).GetComponent<O_ElementBase>();
         }
 
         private void Excute_Monsoon()
         {
-            Debug.Log("Monsoon");
+            currentElement = Instantiate(M_Game.instance.pre_Monsoon).GetComponent<O_ElementBase>();
         }
 
         private void Excute_Updraft()
@@ -66,6 +86,23 @@ namespace Jahaha.UI
         private void Excute_Scan()
         {
             Debug.Log("Scan");
+        }
+
+        private void Excute_Confirm()
+        {
+            Debug.Log("Clicked");
+            if (currentElement != null)
+            {
+                Debug.Log("Confirm");
+                currentElement.Set();
+                currentElement = null;
+            }
+
+        }
+
+        private void Excute_Cancel()
+        {
+            Debug.Log("Cancel");
         }
 
         private void Excute_PullOut()

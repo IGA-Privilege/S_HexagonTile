@@ -7,6 +7,17 @@ public class M_Game : MonoBehaviour
 {
     public static M_Game instance;
     public GameObject vfx_CircleDust;
+    public GameObject pre_Monsoon;
+    public GameObject pre_Tree;
+    public GameObject pre_Cloud;
+    public GameObject pre_Sun;
+    public GameObject pre_Boat;
+    public GameObject pre_Bird;
+    public Color color_GrassLand;
+
+    public bool isGameStart = false;
+
+    public GameObject seed;
 
     private void Awake()
     {
@@ -16,5 +27,18 @@ public class M_Game : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(this.gameObject);
+    }
+
+    private void Update()
+    {
+        if(isGameStart && !seed.activeInHierarchy)
+        {
+            seed.SetActive(true);
+        }
+    }
+
+    public void GameEnd()
+    {
+        Debug.Log("GameEnd");
     }
 }

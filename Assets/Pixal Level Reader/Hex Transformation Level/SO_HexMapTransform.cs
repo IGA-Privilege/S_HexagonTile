@@ -40,4 +40,4 @@ public class HexTileTransfromBinder
     //public string tileName;
 }
 
-public enum TileType { Start, Destination, Grassland, Mountain, Ocean }
+public enum TileType { Start, Destination, Grassland, Mountain, Ocean ,FlowerLand,Snow}

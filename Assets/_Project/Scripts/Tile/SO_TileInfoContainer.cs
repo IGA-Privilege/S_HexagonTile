@@ -9,6 +9,7 @@ public class SO_TileInfoContainer : ScriptableObject
     public string tileName;
     public GameObject tileObject;
     public OnTileObject[] onTileObjects;
+    public bool isSoloGen;
 }
 
 [System.Serializable]

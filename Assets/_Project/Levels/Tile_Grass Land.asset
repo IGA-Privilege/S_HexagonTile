@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b88ca4b0cd40064fb8a7888e4ff971b, type: 3}
+  m_Name: Tile_Grass Land
+  m_EditorClassIdentifier: 
+  tileType: 2
+  tileName: Grass Land
+  tileObject: {fileID: 1271263658083235791, guid: 34a658fa0516db642ae47f6459ffd651, type: 3}
+  onTileObjects:
+  - targetObj: {fileID: 919132149155446097, guid: ebc4a7c2a05125c49bfc5f1d92ea2447, type: 3}
+    toGenRange:
+      minValue: 3
+      maxValue: 6
+    toScaleRange:
+      minValue: 0.69852936
+      maxValue: 1.2941177
+    instantiateType: 1
+  - targetObj: {fileID: 919132149155446097, guid: cd2ac6f4ed40e2d4689368a7e79df49b, type: 3}
+    toGenRange:
+      minValue: 3
+      maxValue: 6
+    toScaleRange:
+      minValue: 0.69852936
+      maxValue: 1.2941177
+    instantiateType: 1
