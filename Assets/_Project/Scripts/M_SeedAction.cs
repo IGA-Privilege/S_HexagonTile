@@ -10,11 +10,13 @@ public class M_SeedAction : Singleton<M_SeedAction>
     public bool isAttaching = false;
     public bool isMoveing = false;
     private O_Bar_Dotted bar_Energy;
+    private O_Bar_Regular bar_Health;
     private M_FloatingSeed seed;
 
     void Start()
     {
         bar_Energy = FindObjectOfType<O_Bar_Dotted>();
+        bar_Health = FindObjectOfType<O_Bar_Regular>();
         seed = GetComponent<M_FloatingSeed>();
     }
 
@@ -58,6 +60,7 @@ public class M_SeedAction : Singleton<M_SeedAction>
             tile_Landing = targetTile;
             if (tileInfo.thisInfo.tileType == TileType.Destination) StartCoroutine(Arrived());
             bar_Energy.OnValueDecrease();
+            if (tileInfo.thisInfo.tileType == TileType.Snow) bar_Health.OnValueDecrease();
         }
 
         void ExcuteSpecialMoveAction()

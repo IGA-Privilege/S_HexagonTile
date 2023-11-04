@@ -92,7 +92,7 @@ namespace Jahaha.UI
 
         private void Excute_Scan()
         {
-            Debug.Log("Scan");
+            O_Scanner.Instance.TriggerScanner();
         }
 
         private void Excute_Confirm()
@@ -104,26 +104,37 @@ namespace Jahaha.UI
                 currentElement.Set();
                 currentElement = null;
             }
+            else
+            {
+                M_Tile.Instance.tile_Targeting.parent.GetComponent<O_TileInteraction>().OnClicked();
+            }
         }
 
         private void Excute_Start()
         {
-            SceneManager.LoadScene(1);
+            M_Global.Instance.EnterSwitchScene(1);
+            //SceneManager.LoadScene(1);
         }
 
         private void Excute_Return()
         {
-            SceneManager.LoadScene(0);
+            M_Global.Instance.EnterSwitchScene(0);
+            //SceneManager.LoadScene(0);
         }
 
         private void Excute_Level()
         {
-            SceneManager.LoadScene(residueNumber);
+            M_Global.Instance.EnterSwitchScene(residueNumber);
+            //SceneManager.LoadScene(residueNumber);
         }
 
         private void Excute_Cancel()
         {
-            Debug.Log("Cancel");
+            if (currentElement != null)
+            {
+                Destroy(currentElement.gameObject);
+                currentElement = null;
+            }
         }
 
         private void Excute_PullOut()

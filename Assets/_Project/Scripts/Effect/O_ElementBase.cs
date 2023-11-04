@@ -55,4 +55,9 @@ public class O_ElementBase : MonoBehaviour
     {
         currentTile.GetComponentInParent<O_TileInfoContainer>().RemoveElement(this);
     }
+
+    private void OnDestroy()
+    {
+        DestroySelf();
+    }
 }

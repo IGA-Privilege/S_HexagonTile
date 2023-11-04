@@ -42,7 +42,10 @@ public class O_Bird : O_ElementMovable
     protected override void Locating()
     {
         base.Locating();
-        Vector3 newPos = new Vector3(currentTile.position.x, height, currentTile.position.z);
-        transform.position = newPos;
+        if (currentTile != null)
+        {
+            Vector3 newPos = new Vector3(currentTile.position.x, height, currentTile.position.z);
+            transform.position = newPos;
+        }
     }
 }

@@ -8,6 +8,7 @@ public class M_InputListener : MonoBehaviour
     public Transform arCamera;
     public bool isMobile;
     public RaycastHit hit;
+    public bool isScreenClickPermited = false;
 
     void Update()
     {
@@ -27,7 +28,7 @@ public class M_InputListener : MonoBehaviour
         {
             if (Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit))
             {
-                if (hit.transform.tag == "Tile")
+                if (hit.transform.tag == "Tile"&& isScreenClickPermited)
                 {
                     hit.transform.parent.GetComponent<O_TileInteraction>().OnClicked();
                 }
@@ -50,7 +51,7 @@ public class M_InputListener : MonoBehaviour
             if (Physics.Raycast(Camera.main.transform.position, arCamera.transform.forward, out hit))
             //if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.transform.tag == "Tile")
+                if (hit.transform.tag == "Tile" && isScreenClickPermited)
                 {
                     hit.transform.parent.GetComponent<O_TileInteraction>().OnClicked();
                 }

@@ -31,14 +31,24 @@ public class M_Game : MonoBehaviour
 
     private void Update()
     {
-        if(isGameStart && !seed.activeInHierarchy)
+        if (isGameStart && !seed.activeInHierarchy)
         {
             seed.SetActive(true);
         }
     }
 
-    public void GameEnd()
+    public void GameSucceed()
     {
-        Debug.Log("GameEnd");
+        Debug.Log("Game Succeed");
+    }
+
+    public void GameFailed()
+    {
+        Debug.Log("Game Failed");
+    }
+
+    public void EnterResultChecking()
+    {
+
     }
 }

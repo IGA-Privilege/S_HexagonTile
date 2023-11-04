@@ -45,6 +45,8 @@ public class M_FloatingSeed : MonoBehaviour
         SeedSelfRotating();
     }
 
+    public Transform TargetCenter { get { return targetCenter; } }
+
     private void SpawnSeed()
     {
         for (int i = 0; i < balls.Length; i++)

@@ -115,7 +115,7 @@ public class O_TileInfoContainer : MonoBehaviour
         FindObjectOfType<M_TileContentGenerator>().GenerateOnSurfaceContent(thisInfo.tileType, transform);
 
         yield return new WaitForSeconds(1f);
-        M_Game.instance.GameEnd();
+        M_Game.instance.GameSucceed();
     }
 
     public Transform TryGetElements(ButtonType targetElements)

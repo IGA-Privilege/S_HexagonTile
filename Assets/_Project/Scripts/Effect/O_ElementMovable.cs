@@ -78,6 +78,7 @@ public class O_ElementMovable : O_ElementBase
         //Debug.Log(currentTile.parent.name + "    " + seed.GetComponent<M_SeedAction>().tile_Landing);
         if (seed.GetComponent<M_SeedAction>().tile_Landing == currentTile.parent)
         {
+            if (this is O_RainCloud) return;
             seed.EnterCircleMovement(transform);
         }
     }
@@ -100,6 +101,7 @@ public class O_ElementMovable : O_ElementBase
         {
             currentTile = targetTile;
             CheckWhetherThereIsMonsoon();
+            EnterSnow();
         }
 
     }
@@ -124,11 +126,24 @@ public class O_ElementMovable : O_ElementBase
         //Locating();
         currentState = ElementState.OnFunction;
         M_FloatingSeed seed = FindObjectOfType<M_FloatingSeed>();
-        if(seed!=null)
-        if (seed.CheckIsSeedAttachedThis(transform))
-        {
-            seed.GetComponent<M_SeedAction>().tile_Landing = currentTile;
-            seed.ExitCircleMovement();
-        }
+        if (seed != null)
+            if (seed.CheckIsSeedAttachedThis(transform))
+            {
+                seed.GetComponent<M_SeedAction>().tile_Landing = currentTile;
+                EnterSnow();
+                seed.ExitCircleMovement();
+            }
+    }
+
+    void EnterSnow()
+    {
+        M_FloatingSeed seed = FindObjectOfType<M_FloatingSeed>();
+
+        Debug.Log(seed.TargetCenter);
+        Debug.Log(currentTile.GetComponentInParent<O_TileInfoContainer>().thisInfo.tileType == TileType.Snow);
+
+        if (seed.TargetCenter == transform
+            && currentTile.GetComponentInParent<O_TileInfoContainer>().thisInfo.tileType == TileType.Snow)
+            FindObjectOfType<O_Bar_Regular>().OnValueDecrease();
     }
 }
