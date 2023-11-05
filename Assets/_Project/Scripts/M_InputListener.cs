@@ -22,7 +22,7 @@ public class M_InputListener : MonoBehaviour
         {
             if (hit.transform.tag == "Tile") M_Tile.Instance.UpdateTargetingTile(hit);
         }
-        else M_Tile.Instance.UpdateTargetingTileToNull();
+        else if(M_Tile.Instance!=null)M_Tile.Instance.UpdateTargetingTileToNull();
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -44,7 +44,7 @@ public class M_InputListener : MonoBehaviour
         {
             if (hit.transform.tag == "Tile") M_Tile.Instance.UpdateTargetingTile(hit);
         }
-        else M_Tile.Instance.UpdateTargetingTileToNull();
+        else if(M_Tile.Instance != null) M_Tile.Instance.UpdateTargetingTileToNull();
 
         if (Input.GetMouseButtonDown(0))
         {

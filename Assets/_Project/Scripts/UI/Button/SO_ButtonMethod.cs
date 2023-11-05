@@ -87,7 +87,7 @@ namespace Jahaha.UI
 
         private void Excute_Setting()
         {
-            Debug.Log("Setting");
+            M_Global.Instance.EnterSwitchScene(1);
         }
 
         private void Excute_Scan()

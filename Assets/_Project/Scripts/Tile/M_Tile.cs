@@ -28,7 +28,12 @@ public class M_Tile : Singleton<M_Tile>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) StartCoroutine(MapGen());
+        if (Input.GetKeyDown(KeyCode.Space)) TriggerMapGen();
+    }
+
+    public void TriggerMapGen()
+    {
+        StartCoroutine(MapGen());
     }
 
     public void InitializeHexMap()

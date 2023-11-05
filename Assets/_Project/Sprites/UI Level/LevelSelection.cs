@@ -39,8 +39,8 @@ public class LevelSelection : MonoBehaviour
             newLevel.LookAt(lookAtPosition);
             //同步Level信息
             newLevel.Find("Image").GetComponent<SpriteRenderer>().sprite = levels[i].img_Tile;
-            newLevel.Find("Name").GetComponent<TMPro.TMP_Text>().text = levels[i].levelName;
-            newLevel.Find("Index").GetComponent<TMPro.TMP_Text>().text = levels[i].levelIndex.ToString();
+            newLevel.Find("Name").GetComponent<TMP_Text>().text = levels[i].levelName;
+            newLevel.Find("Index").GetComponent<TMP_Text>().text = levels[i].levelIndex.ToString();
 
             newLevel.SetParent(transform);
         }
@@ -63,7 +63,7 @@ public class LevelSelection : MonoBehaviour
 
     public void LoadLevel()
     {
-        M_Global.Instance.EnterSwitchScene(currentLevel + 1);
+        M_Global.Instance.EnterSwitchScene(currentLevel+2);
     }
 
     public void ReturnToMain()

@@ -66,6 +66,7 @@ public class M_Global : MonoBehaviour
         //{
 
         //}
+        if (FindObjectOfType<M_Tile>() != null) FindObjectOfType<M_Tile>().TriggerMapGen();
     }
 
     

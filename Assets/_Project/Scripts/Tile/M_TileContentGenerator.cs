@@ -77,13 +77,12 @@ public class M_TileContentGenerator : MonoBehaviour
             s.AppendInterval(0.3f);
             s.Append(trans.DOMoveY(trans.localPosition.y - height, 0.1f));
             s.AppendCallback(() => LandingParticleGeneration());
-            s.AppendCallback(() => M_Game.instance.isGameStart = true);
         }
         else if(type == InstantiateType.ScaleUp)
         {
             trans.Rotate(new Vector3(0, Random.Range(0, 180), 0));
             trans.localScale = Vector3.zero;
-            trans.DOScale(targetScale, 1);
+            trans.DOScale(targetScale, 1).OnComplete(() => M_Game.instance.isGameStart = true);
         }
 
         void LandingParticleGeneration()

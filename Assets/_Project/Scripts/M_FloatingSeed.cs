@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
-public enum SeedMoveState { Random,Circle }
+public enum SeedMoveState { Random, Circle }
 public class M_FloatingSeed : MonoBehaviour
 {
     public GameObject[] balls; // ¥Ê¥¢–°«Ú∂‘œÛ
@@ -166,6 +166,8 @@ public class M_FloatingSeed : MonoBehaviour
         recordAngle = 0;
         moveState = SeedMoveState.Random;
         transform.DOMoveY(pos_DefaultY, 0.4f);
+
+        GetComponent<M_SeedAction>().TryTriggerArrive();
     }
 
     public bool CheckIsSeedAttachedThis(Transform _FromElement)

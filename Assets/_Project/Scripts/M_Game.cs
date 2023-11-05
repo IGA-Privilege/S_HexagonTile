@@ -39,16 +39,24 @@ public class M_Game : MonoBehaviour
 
     public void GameSucceed()
     {
-        Debug.Log("Game Succeed");
+        M_Global.Instance.EnterSwitchScene(1);
     }
 
     public void GameFailed()
     {
-        Debug.Log("Game Failed");
+        M_Global.Instance.EnterSwitchScene(1);
     }
 
     public void EnterResultChecking()
     {
+        StartCoroutine(StartCheck());
+    }
 
+    IEnumerator StartCheck()
+    {
+        yield return new WaitForSeconds(1);
+        O_TileInfoContainer currentTile = FindObjectOfType<M_SeedAction>().tile_Landing.GetComponentInParent<O_TileInfoContainer>();
+        if (currentTile.thisInfo.tileType == TileType.Destination) GameSucceed();
+        else GameFailed();
     }
 }
